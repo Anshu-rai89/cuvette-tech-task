@@ -5,16 +5,22 @@ import PhraseList from "./component/PhraseList";
 import CustomModal from "./component/Modal";
 import axios from "axios";
 function App() {
+  // variables to keep track of phraseList
   const [phraseList, setPhrase] = useState([]);
+  // variable to trigger useEffect on any write delete update
   const [update, setUpdate] = useState(false);
-  useEffect(() => {
-    const getData = async () => {
-      const result = await axios("http://localhost:7000/api/getPhrase");
-      console.log("data is ", result.data.data);
-      setPhrase(result.data.data);
-    };
 
-    getData();
+  useEffect(() => {
+    try {
+      const getData = async () => {
+        const result = await axios("http://localhost:7000/api/getPhrase");
+        setPhrase(result.data.data);
+      };
+
+      getData();
+    } catch (err) {
+      alert(`Error in getting phrases ${JSON.stringify(err)}`);
+    }
   }, [update]);
 
   return (

@@ -5,15 +5,18 @@ import axios from "axios";
 const PhraseComponent: FunctionComponent<any> = (props) => {
   const handleDelete = async () => {
     try {
+      // api call to delete phrase to mongo
+      // TODO -> Move url to common folder with base URL & api version
       const res = await axios.delete(
         `http://localhost:7000/api/deletePhrase/${props.phrase.id}`
       );
-      console.log("res delete", res);
       props.setUpdate(true);
     } catch (err) {
-      console.log("error in deleting phrase");
+      alert(`Error in deleting phrase ${JSON.stringify(err)}`);
     }
   };
+
+  // phrase is empty
   if (!props.phrase.phrase) {
     return <div></div>;
   }

@@ -7,10 +7,14 @@ const PhraseForm: FunctionComponent<FormProps> = ({
   setUpdate,
   length,
 }) => {
+  // variables to keep track of phrase input value
   const [phrase, setPhrase] = useState("");
+
+  // handling form submit here
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      // api call to add phrase in mongo
       const res = await axios.post(
         "http://localhost:7000/api/addPhrase",
         { phrase, id: length + 1 },
@@ -21,11 +25,10 @@ const PhraseForm: FunctionComponent<FormProps> = ({
         }
       );
 
-      console.log("write req", res);
       setUpdate(true);
       setShow(false);
     } catch (err) {
-      console.log("Error in adding", err);
+      alert(`Error in adding phrase ${JSON.stringify(err)}`);
     }
   };
 
