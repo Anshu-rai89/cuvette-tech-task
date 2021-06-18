@@ -16,3 +16,6 @@
 - npm i
 - npm start
 - Server running on Port 7000
+- cd cuvette-task/frontend
+- npm i
+- npm start
