@@ -5,7 +5,7 @@ const ApiRoutes = [
   {
     method: "GET",
     path: "/getData",
-    handler: controller.getPhrase,
+    handler: controller.getPhraseFromFile,
   },
   {
     method: "GET",
@@ -15,7 +15,7 @@ const ApiRoutes = [
   {
     method: "POST",
     path: "/addLocalPhrase",
-    handler: controller.write,
+    handler: controller.writePhraseInFile,
   },
   {
     method: "POST",
@@ -25,7 +25,7 @@ const ApiRoutes = [
   {
     method: "DELETE",
     path: "/deleteLocalPhrase/{id}",
-    handler: controller.delete,
+    handler: controller.deleteFromFile,
   },
   {
     method: "DELETE",
