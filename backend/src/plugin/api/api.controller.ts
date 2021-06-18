@@ -10,12 +10,14 @@ export default class ApiController {
   public async writePhraseToMongo(request: IExtendedRequest) {
     try {
       // grab db from app namespace
+
+      console.log("in write to mongo", request.payload);
       const db = request.server.app.db;
       const collection: Collection = db.collection(Collections.Phrase);
       const payload = request.payload as any;
       const id = payload.id;
       const phrase = payload.phrase;
-
+      console.log("id phrase is ", id, phrase);
       const newPhrase: Phrase = { id, phrase };
       const result = await collection.insertOne(newPhrase);
 
@@ -32,8 +34,11 @@ export default class ApiController {
     try {
       const db = request.server.app.db;
       const id = request.params.id as any;
+      console.log("id is", id);
       const collection: Collection = db.collection(Collections.Phrase);
-      const result = await await collection.findOneAndDelete({ id: id });
+      const result = await collection.deleteOne({
+        id: Number(id),
+      });
 
       return {
         message: "delete Phrase Success",
@@ -75,6 +80,8 @@ export default class ApiController {
       const db = request.server.app.db;
       const collection: Collection = db.collection(Collections.Phrase);
       const result = await collection.find({}).toArray();
+
+      console.log("res", result);
 
       return {
         message: "get  Phrase Success",
