@@ -24,7 +24,7 @@ export default class ApiController {
 
       // if id or phrase is not present
       if (!id || !phrase) {
-        return h.code(400);
+        return Boom.badRequest("invalid query");
       }
 
       // create phrase
@@ -51,7 +51,9 @@ export default class ApiController {
       const collection: Collection = db.collection(Collections.Phrase);
       // checking if phrase with id exists or not
       const phrase = await collection.findOne({ id: Number(id) });
-      if (!phrase) return h.code(400);
+      if (!phrase) {
+        return Boom.badRequest("invalid query");
+      }
 
       // if exist delete it
       const result = await collection.deleteOne({
@@ -63,6 +65,7 @@ export default class ApiController {
         data: result,
       };
     } catch (err) {
+      console.log("delete error", err);
       return Boom.boomify(err);
     }
   }
@@ -101,8 +104,6 @@ export default class ApiController {
       const db = request.server.app.db;
       const collection: Collection = db.collection(Collections.Phrase);
       const result = await collection.find({}).toArray();
-
-      console.log("res", result);
 
       return {
         message: "get  Phrase Success",

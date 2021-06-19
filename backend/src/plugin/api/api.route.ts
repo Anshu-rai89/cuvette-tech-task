@@ -37,11 +37,6 @@ const ApiRoutes = [
     path: "/loadPhraseToMongo",
     handler: controller.loadPhareToMongo,
   },
-  {
-    method: "GET",
-    path: "/loadData",
-    handler: controller.loadPhareToMongo,
-  },
 ];
 
 export default ApiRoutes;

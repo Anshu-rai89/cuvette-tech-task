@@ -12,6 +12,8 @@ function App() {
 
   useEffect(() => {
     try {
+      // api call to get all phrases from Mongo
+      // TODO -> handle url in proper way
       const getData = async () => {
         const result = await axios("http://localhost:7000/api/getPhrase");
         setPhrase(result.data.data);
